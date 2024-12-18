@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-from mitmproxy import proxy, options
+from mitmproxy import proxy
+from mitmproxy import options
 from mitmproxy.tools.dump import DumpMaster
 import json
 import os
@@ -28,7 +29,7 @@ def start():
     opts = options.Options(listen_host='0.0.0.0', listen_port=3124)
     pconf = proxy.config.ProxyConfig(opts)
     m = DumpMaster(opts)
-    m.server = proxy.server.ProxyServer(pconf)
+    m.server = proxy.server.ProxyServer(opts)
     m.addons.add(myaddon)
 
     try:
