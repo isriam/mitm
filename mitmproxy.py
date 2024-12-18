@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from mitmproxy import http
 from mitmproxy.options import Options
 from mitmproxy.proxy.config import ProxyConfig
 from mitmproxy.proxy.server import ProxyServer
@@ -12,7 +11,7 @@ class Aboutv2:
     def __init__(self):
         complete = False
 
-    def response(flow: http.HTTPFlow) -> None:
+    def response(self, flow):
         if flow.response and flow.response.content:
             # print(vars(flow.request))
             # print(flow.request.path)
@@ -23,6 +22,7 @@ class Aboutv2:
                 with open("/root/.mitmproxy/wardragons/about_v2.txt", "w") as file:
                     json.dump(about_v2, file)
                 os.chmod("/root/.mitmproxy/wardragons/about_v2.txt", 0o744)
+        pass
 
 
 class ProxyMaster(DumpMaster):
