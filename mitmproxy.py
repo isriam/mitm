@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 from mitmproxy import http
-# from mitmproxy import options
-# from mitmproxy import proxy
-# from mitmproxy.tools.dump import DumpMaster
-from mitmproxy.addons import core
+from mitmproxy.options import Options
+from mitmproxy.proxy.config import ProxyConfig
+from mitmproxy.proxy.server import ProxyServer
+from mitmproxy.tools.dump import DumpMaster
 import json
 import os
 
@@ -25,18 +25,21 @@ class Aboutv2:
                 os.chmod("/root/.mitmproxy/wardragons/about_v2.txt", 0o744)
 
 
-def start():
-    myaddon = Aboutv2()
-    opts = options.Options(listen_host='0.0.0.0', listen_port=3124)
-    pconf = proxy.config.ProxyConfig(opts)
-    m = DumpMaster(opts)
-    m.server = proxy.server.ProxyServer(pconf)
-    m.addons.add(myaddon)
+class ProxyMaster(DumpMaster):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    try:
-        m.run()
-    except KeyboardInterrupt:
-        m.shutdown()
+    def run(self):
+        try:
+            DumpMaster.run(self)
+        except KeyboardInterrupt:
+            self.shutdown()
 
 
-start()
+if __name__ == "__main__":
+    options = Options(listen_host='0.0.0.0', listen_port=3124, http2=True)
+    config = ProxyConfig(options)
+    master = ProxyMaster(options, with_termlog=False, with_dumper=False)
+    master.server = ProxyServer(config)
+    master.addons.add(Aboutv2())
+    master.run()
