@@ -27,7 +27,7 @@ class Aboutv2:
 def start():
     myaddon = Aboutv2()
     opts = options.Options(listen_host='0.0.0.0', listen_port=3124)
-    pconf = proxy.config.ProxyConfig(opts)
+    #pconf = proxy.config.ProxyConfig(opts)
     m = DumpMaster(opts)
     m.addons.add(myaddon)
 
