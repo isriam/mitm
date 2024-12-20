@@ -21,7 +21,7 @@ def response(self, flow):
 
 if __name__ == "__main__":
 
-options = Options(listen_host='0.0.0.0', listen_port=8080, certs=['*=mitmproxy.pem'])
+options = Options(listen_host='0.0.0.0', listen_port=8080)
 m = DumpMaster(options, with_termlog=False, with_dumper=False)
 config = ProxyConfig(options)
 
