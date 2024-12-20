@@ -1,39 +1,37 @@
-#!/usr/bin/env python3
-from mitmproxy import proxy
 from mitmproxy import options
-from mitmproxy.tools.dump import DumpMaster
-import json
-import os
+from mitmproxy.addons import default_addons
+from mitmproxy.tools.main import T
+from mitmproxy.utils import debug
 
+def run(
+    master_cls: type[T],
+) -> T:
 
-class Aboutv2:
-    def __init__(self):
-        complete = False
+    async def main() -> T:
+        logging.getLogger().setLevel(logging.DEBUG)
+        logging.getLogger("tornado").setLevel(logging.WARNING)
+        logging.getLogger("asyncio").setLevel(logging.WARNING)
+        logging.getLogger("hpack").setLevel(logging.WARNING)
+        debug.register_info_dumpers()
 
-    def response(self, flow):
-        if flow.response and flow.response.content:
-            # print(vars(flow.request))
-            # print(flow.request.path)
-            if '/ext/dragonsong/event/about_v2' in flow.request.path:
-                print('about_v2', flow.request.path)
-                about_v2_raw = flow.response.content.decode("utf-8")
-                about_v2 = json.loads(about_v2_raw)
-                with open("/root/.mitmproxy/wardragons/about_v2.txt", "w") as file:
-                    json.dump(about_v2, file)
-                os.chmod("/root/.mitmproxy/wardragons/about_v2.txt", 0o744)
-        pass
+        opts = options.Options()
+        master = master_cls(opts)
+        master.addons.add(*default_addons())
+        loop = asyncio.get_running_loop()
 
+        def _sigint(*_):
+            loop.call_soon_threadsafe(
+                getattr(master, "prompt_for_exit", master.shutdown)
+            )
 
-def start():
-    myaddon = Aboutv2()
-    opts = options.Options(listen_host='0.0.0.0', listen_port=3124)
-    #pconf = proxy.config.ProxyConfig(opts)
-    m = DumpMaster(opts)
-    m.addons.add(myaddon)
+        def _sigterm(*_):
+            loop.call_soon_threadsafe(master.shutdown)
+        signal.signal(signal.SIGINT, _sigint)
+        signal.signal(signal.SIGTERM, _sigterm)
 
-    try:
-        m.run()
-    except KeyboardInterrupt:
-        m.shutdown()
+        await master.run()
+        return master
 
-start()
+    return asyncio.run(main())
+
+run(Master)
