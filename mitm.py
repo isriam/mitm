@@ -3,7 +3,7 @@ from mitmproxy.addons import default_addons
 from mitmproxy.tools.main import T
 from mitmproxy.utils import debug
 
-def run(master_cls: type[T],) -> T:
+def run(master_cls: type[T]) -> T:
 
     async def main() -> T:
         logging.getLogger().setLevel(logging.DEBUG)
