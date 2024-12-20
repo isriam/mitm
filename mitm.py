@@ -1,35 +1,35 @@
-from mitmproxy import options
-from mitmproxy.addons import default_addons
-from mitmproxy.tools.main import T
-from mitmproxy.utils import debug
+from mitmproxy.options import Options
+from mitmproxy.proxy.config import ProxyConfig
+from mitmproxy.proxy.server import ProxyServer
+from mitmproxy.tools.dump import DumpMaster
+import os, sys, re, datetime, json
 
-def run(master_cls: type[T]) -> T:
+class Addon(object):
+def __init__(self):
+    pass
 
-    async def main() -> T:
-        logging.getLogger().setLevel(logging.DEBUG)
-        logging.getLogger("tornado").setLevel(logging.WARNING)
-        logging.getLogger("asyncio").setLevel(logging.WARNING)
-        logging.getLogger("hpack").setLevel(logging.WARNING)
-        debug.register_info_dumpers()
+def request(self, flow):
+    # examine request here
+    if flow.request.host == 'testserver.net':
+        flow.request.host = 'mynewserver.com'
+        print('New try ---> Bypassing.')
 
-        opts = options.Options()
-        master = master_cls(opts)
-        master.addons.add(*default_addons())
-        loop = asyncio.get_running_loop()
+def response(self, flow):
+    # examine response here
+    pass
 
-        def _sigint(*_):
-            loop.call_soon_threadsafe(
-                getattr(master, "prompt_for_exit", master.shutdown)
-            )
 
-        def _sigterm(*_):
-            loop.call_soon_threadsafe(master.shutdown)
-        signal.signal(signal.SIGINT, _sigint)
-        signal.signal(signal.SIGTERM, _sigterm)
+if __name__ == "__main__":
 
-        await master.run()
-        return master
+options = Options(listen_host='0.0.0.0', listen_port=8080, certs=['*=mitmproxy.pem'])
+m = DumpMaster(options, with_termlog=False, with_dumper=False)
+config = ProxyConfig(options)
 
-    return asyncio.run(main())
+m.server = ProxyServer(config)
+m.addons.add(Addon())
 
-run(Master)
+try:
+    print('Redirection active.')
+    m.run()
+except KeyboardInterrupt:
+    m.shutdown()
