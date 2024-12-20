@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from mitmproxy.options import Options
 from mitmproxy.proxy.config import ProxyConfig
 from mitmproxy.proxy.server import ProxyServer
