@@ -11,7 +11,7 @@ def response(flow: http.HTTPFlow) -> None:
             print('about_v2', flow.request.path)
             about_v2_raw = flow.response.content.decode("utf-8")
             about_v2 = json.loads(about_v2_raw)
-            parsed = re.search(r'(?P<player_id>player_id=)(?P<pgid>.*?)(?P<end>&)', flow.request.path, re.M)
+            parsed = re.search(r'(?P<player_id>player_id=)(?P<pgid>[a-zA-Z0-9]+)', flow.request.path, re.M)
             pgid = parsed.group(2)
             with open(f"/root/.mitmproxy/wardragons/about_v2.txt", "w") as file:
                 json.dump(about_v2, file)
@@ -20,7 +20,7 @@ def response(flow: http.HTTPFlow) -> None:
         if '/dragons/event/current' in flow.request.path:
             print('params', flow.request.path)
             params = flow.response.content.decode("utf-8")
-            parsed = re.search(r'(?P<player_id>player_id=)(?P<pgid>.*?)(?P<end>&)', flow.request.path, re.M)
+            parsed = re.search(r'(?P<player_id>player_id=)(?P<pgid>[a-zA-Z0-9]+)', flow.request.path, re.M)
             pgid = parsed.group(2)
             with open(f"/root/.mitmproxy/wardragons/params.txt" , "w") as file:
                 file.write(params)
@@ -30,7 +30,7 @@ def response(flow: http.HTTPFlow) -> None:
             print('world_params', flow.request.path)
             world_params_raw = flow.response.content.decode("utf-8")
             world_params = json.loads(world_params_raw)
-            parsed = re.search(r'(?P<player_id>player_id=)(?P<pgid>.*)', flow.request.path, re.M)
+            parsed = re.search(r'(?P<player_id>player_id=)(?P<pgid>[a-zA-Z0-9]+)', flow.request.path, re.M)
             pgid = parsed.group(2)
             with open(f"/root/.mitmproxy/wardragons/world_params.txt", "w") as file:
                 json.dump(world_params, file)
