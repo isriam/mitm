@@ -15,10 +15,10 @@ def callback():
     if request.method == "POST":
         if request.form:
             print('form')
-            form_text = request.form['txt'].split(' ')
             form_dict = {}
-            if form_text:
+            if request.form['txt']:
                 print('form text')
+                form_text = request.form['txt'].split(' ')
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
                 print(form_dict)
             output = main(type=form_dict.get('0', 'gold'), c_num=form_dict.get('1', 10))
