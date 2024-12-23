@@ -19,8 +19,8 @@ def callback():
                 print('form text')
                 form_text = request.form['txt'].split(' ')
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
-                print(form_dict)
-            print(form_dict)
+                # print(form_dict)
+            # print(form_dict)
             chest_type = form_dict.get('0', c_type_dict.get('gold'))
             chest_num = form_dict.get('1', 10)
             print(chest_type, chest_num)
@@ -81,6 +81,7 @@ def xml_parser(data):
 def main(**kwargs):
     from chestpredictor2 import ChestPredictor
     c_num = kwargs.get('c_num', 10)
+    print(c_num)
     total = kwargs.get('total', False)
     spin_type_title = kwargs.get('type', c_type_dict.get('gold'))
     print(spin_type_title)
