@@ -23,7 +23,7 @@ def callback():
             print(form_dict)
             chest_type = form_dict.get(0, 'gold')
             chest_num = form_dict.get(1, 10)
-            print(chest_type, chest_num)
+            # print(chest_type, chest_num)
             output = main(type=chest_type, c_num=chest_num)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
@@ -80,10 +80,12 @@ def xml_parser(data):
 
 def main(**kwargs):
     from chestpredictor2 import ChestPredictor
+    chest_type = kwargs.get('chest_type')
+    print(chest_type)
     c_num = kwargs.get('c_num', 10)
     print(c_num)
     total = kwargs.get('total', False)
-    spin_type_title = kwargs.get('type', 'GOLD CHEST')
+    spin_type_title = kwargs.get(c_type_dict.get(chest_type), 'GOLD CHEST')
     print(spin_type_title)
     # params = /dragons/event/current?
     # about_v2 = /ext/dragonsong/event/about_v2?
