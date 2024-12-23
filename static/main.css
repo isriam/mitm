@@ -1,0 +1,18 @@
+.output {
+    white-space: pre-wrap;
+}
+.help {
+    white-space: pre-wrap;
+    float: left;
+    margin: 10px
+}
+.adminhelp {
+    white-space: pre-wrap;
+    float: left;
+    margin: 30px
+}
+.search {
+    white-space: pre-wrap;
+    float: left;
+    margin: 30px
+}

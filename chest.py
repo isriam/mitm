@@ -23,24 +23,15 @@ def callback():
             # print('form exists')
             print('Web Request!')
             print(request.headers)
-            if command.startswith('/'):
-                if '/linux' in command:
-                    print('sneaky!')
-                    print(command, body)
-                    output = 'Sneaky!'
-                else:
-                    reply_token, group_id = 0, 0
-                    print(body)
-                    output = admincmds(body, reply_token, group_id)
-            else:
-                output = cmds(body)
+            print(body)
+            output = main(c_num, c_type, params, about_v2, world_params, total)
+        else:
+            output = "not form"
             refill_form = request.form['txt']
             print('output', output)
-            return render_template("bot.html", content=output, default=refill_form, help=help, search=search)#, adminhelp=help2)
-        else:
-            print("not request.form")
+            return render_template("bot.html", content=output, default=refill_form)#, adminhelp=help2)
     if request.method == "GET":
-        return render_template("bot.html", help=help, search=search)#, adminhelp=help2)
+        return render_template("bot.html")#, adminhelp=help2)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
