@@ -18,6 +18,7 @@ def callback():
             form_text = request.form['txt'].split(' ')
             form_dict = {}
             if form_text:
+                print('form text')
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
                 print(form_dict)
             output = main(type=form_dict.get('0', 'gold'), c_num=form_dict.get('1', 10))
