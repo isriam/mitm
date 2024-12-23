@@ -20,10 +20,10 @@ def callback():
             output = main()
             refill_form = request.form['txt']
             return render_template("bot.html", content=output, default=refill_form, help=help_text)
-    if request.method == "GET":
+    else:
         # output = main()
         # form_output = '\n'.join(output)
-        return render_template("bot.html", help=help_text)#, content=form_output)#, adminhelp=help2)
+        return render_template("bot.html", help=help_text)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
