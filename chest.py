@@ -13,7 +13,7 @@ def callback():
     if request.method == "GET":
         output = main(c_num, c_type, params, about_v2, world_params, total)
         form_output = '\n'.join(output)
-        return render_template("bot.html", help=help, content=form_output)#, adminhelp=help2)
+        return render_template("bot.html", help=help_text, content=form_output)#, adminhelp=help2)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
@@ -210,6 +210,8 @@ if __name__ == "__main__":
 
     with open('/home/ubuntu/.mitmproxy/wardragons/world_params.txt', 'r') as file:
         world_params = json.load(file)
+
+    help_text = help()
 
     print('serving')
     serve(app, host='0.0.0.0', port=5443)
