@@ -15,9 +15,9 @@ def callback():
     if request.method == "POST":
         if request.form:
             print('form')
-            print(request)
+            print(vars(request))
             #body = request.get_json()
-            print(body)
+            # print(body)
             output = main()
             refill_form = request.form['txt']
             return render_template("bot.html", content=output, default=refill_form, help=help)
