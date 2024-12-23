@@ -22,7 +22,7 @@ def callback():
                 # print(form_dict)
             print(form_dict)
             chest_type = form_dict.get(0, 'gold')
-            chest_num = form_dict.get(int(1), 10)
+            chest_num = form_dict.get(1, 10)
             total = form_dict.get(2, False)
             # print(chest_type, chest_num)
             output = main(type=chest_type, c_num=chest_num, total=total)
@@ -83,7 +83,7 @@ def main(**kwargs):
     from chestpredictor2 import ChestPredictor
     chest_type = kwargs.get('type', 'gold')
     print(chest_type)
-    c_num = kwargs.get('c_num', 10)
+    c_num = int(kwargs.get('c_num', 10))
     print(c_num)
     total = kwargs.get('total', False)
     spin_type_title = c_type_dict.get(chest_type, 'GOLD CHEST')
