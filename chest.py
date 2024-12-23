@@ -21,9 +21,9 @@ def callback():
             refill_form = request.form['txt']
             return render_template("bot.html", content=output, default=refill_form, help=help)
     if request.method == "GET":
-        output = main()
-        form_output = '\n'.join(output)
-        return render_template("bot.html", help=help_text, content=form_output)#, adminhelp=help2)
+        # output = main()
+        # form_output = '\n'.join(output)
+        return render_template("bot.html", help=help_text)#, content=form_output)#, adminhelp=help2)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
