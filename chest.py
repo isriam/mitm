@@ -178,7 +178,7 @@ def main(c_num, c_type, params, about_v2, world_params, total):
     return out
 
 def help():
-    help="""
+    help=f"""
 Step 1, download profile
 Step 2, import profile
 Step 3, enable profile
@@ -192,7 +192,11 @@ Step 2
 go to general - vpn and profiles - install mitmproxy certificate
 
 Step 3
-go to general - about - certificate trust settings - enable mitmproxy root cert"""
+go to general - about - certificate trust settings - enable mitmproxy root cert
+
+about_v2_creation = {about_v2_creation_time}
+params_creation = {params_creation_time}
+atlas_creation = {world_params_creation_time}"""
     return help
 
 if __name__ == "__main__":
