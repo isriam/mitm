@@ -15,11 +15,12 @@ def callback():
     if request.method == "POST":
         if request.form:
             print('form')
-            body = request.form['txt']
+            body = request.form['txt'].split(' ')
             print(body)
             output = main()
+            form_output = '\n'.join(output)
             refill_form = request.form['txt']
-            return render_template("bot.html", content=output, default=refill_form, help=help_text)
+            return render_template("bot.html", content=form_output, default=refill_form, help=help_text)
     else:
         # output = main()
         # form_output = '\n'.join(output)
