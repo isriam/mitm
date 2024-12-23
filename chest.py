@@ -16,9 +16,11 @@ def callback():
         if request.form:
             print('form')
             form_text = request.form['txt'].split(' ')
-            form_dict = {idx: ele for idx, ele in enumerate(form_text)}
-            print(form_dict)
-            output = main()
+            form_dict = {}
+            if form_text:
+                form_dict = {idx: ele for idx, ele in enumerate(form_text)}
+                print(form_dict)
+            output = main(form_dict)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, default=refill_form, help=help_text)
@@ -70,6 +72,7 @@ def xml_parser(data):
             wddata.update({'params_and_data': json.loads(params.group(2))})
     # print(wddata)
     return wddata
+
 
 def main(**kwargs):
     from chestpredictor2 import ChestPredictor
