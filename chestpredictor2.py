@@ -68,12 +68,12 @@ def getRune(rune_id: str) -> Rune:
             return r
 
 try:
-    with open('/mnt/nas/admin/wardragons/wdscripts/RuneAbility.csv', 'r') as f:
+    with open('RuneAbility.csv', 'r') as f:
         c = csv.DictReader(f, delimiter=",")
         rune_abilities = [RuneAbility(**x)
                           for x in c if x['identifier'] != "String"]
 except Exception as e:
-    with open('RuneAbility.csv', 'r') as f:
+    with open('/home/ubuntu/.mitmproxy/wardragons/RuneAbility.csv', 'r') as f:
         c = csv.DictReader(f, delimiter=",")
         rune_abilities = [RuneAbility(**x)
                           for x in c if x['identifier'] != "String"]
@@ -83,7 +83,7 @@ try:
         c = csv.DictReader(f, delimiter=",")
         runes = [Rune(**x) for x in c if x['identifier'] != "String"]
 except Exception as e:
-    with open('/mnt/nas/admin/wardragons/wdscripts/Rune.csv', 'r') as f:
+    with open('/home/ubuntu/.mitmproxy/wardragons/Rune.csv', 'r') as f:
         c = csv.DictReader(f, delimiter=",")
         runes = [Rune(**x) for x in c if x['identifier'] != "String"]
 
