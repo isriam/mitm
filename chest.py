@@ -204,18 +204,23 @@ if __name__ == "__main__":
     c_type = 'all'
     total = False
 
+    about_v2_path = '/home/ubuntu/.mitmproxy/wardragons/about_v2.txt'
+    about_v2_creation_time = time.ctime(os.path.getctime(about_v2_path))
 
-    with open('/home/ubuntu/.mitmproxy/wardragons/about_v2.txt', 'r') as file:
+    params_path = '/home/ubuntu/.mitmproxy/wardragons/params.txt'
+    params_creation_time = time.ctime(os.path.getctime(params_path))
+
+    world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
+    world_params_creation_time = time.ctime(os.path.getctime(world_params_path))
+
+    with open(about_v2_path, 'r') as file:
         about_v2 = json.load(file)
-        about_v2_creation_time = time.ctime(os.path.getctime(file))
 
-    with open('/home/ubuntu/.mitmproxy/wardragons/params.txt', 'r') as file:
+    with open(params_path, 'r') as file:
         params = file.read()
-        params_creation_time = time.ctime(os.path.getctime(file))
 
-    with open('/home/ubuntu/.mitmproxy/wardragons/world_params.txt', 'r') as file:
+    with open(world_params_path, 'r') as file:
         world_params = json.load(file)
-        world_params_creation_time = time.ctime(os.path.getctime(file))
 
     help_text = help()
 
