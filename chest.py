@@ -181,11 +181,9 @@ Step 2, import profile
 Step 3, enable profile
 
 Step 1
-set proxy in wifi settings 129.146.200.231 port 3124
-in safari go to mitm.it/
-click visit this site
-
-download ios certificate
+a) set proxy in wifi settings 129.146.200.231 port 3124
+b) in safari go to mitm.it/ and click visit this site
+c) download ios certificate
 
 Step 2
 go to general - vpn and profiles - install mitmproxy certificate
