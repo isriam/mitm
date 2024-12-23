@@ -30,7 +30,7 @@ def callback():
             output = "not form"
             refill_form = request.form['txt']
             print('output', output)
-            return render_template("bot.html", content=output, default=refill_form)#, adminhelp=help2)
+        return render_template("bot.html", content=output, default=refill_form)#, adminhelp=help2)
     if request.method == "GET":
         return render_template("bot.html")#, adminhelp=help2)
     return 'OK'
