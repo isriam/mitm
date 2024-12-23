@@ -23,6 +23,7 @@ def callback():
             print(form_dict)
             chest_type = form_dict.get('0', 'gold')
             chest_num = form_dict.get('1', 10)
+            print(chest_type, chest_num)
             output = main(type=chest_type, c_num=chest_num)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
@@ -82,6 +83,7 @@ def main(**kwargs):
     c_num = kwargs.get('c_num', 10)
     total = kwargs.get('total', False)
     spin_type_title = kwargs.get('type', c_type_dict.get('gold'))
+    print(spin_type_title)
     # params = /dragons/event/current?
     # about_v2 = /ext/dragonsong/event/about_v2?
     # world params = /ext/dragonsong/world/get_params?
