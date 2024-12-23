@@ -32,7 +32,8 @@ def callback():
             print('output', output)
         return render_template("bot.html", content=output, default=refill_form)#, adminhelp=help2)
     if request.method == "GET":
-        return render_template("bot.html")#, adminhelp=help2)
+        output = main(c_num, c_type, params, about_v2, world_params, total)
+        return render_template("bot.html", content=output)#, adminhelp=help2)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
