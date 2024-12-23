@@ -13,7 +13,7 @@ def callback():
     if request.method == "GET":
         output = main(c_num, c_type, params, about_v2, world_params, total)
         form_output = '\n'.join(output)
-        return render_template("bot.html", content=form_output)#, adminhelp=help2)
+        return render_template("bot.html", help=help, content=form_output)#, adminhelp=help2)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
@@ -175,6 +175,23 @@ def main(c_num, c_type, params, about_v2, world_params, total):
     print('\n'.join(out))
     return out
 
+def help():
+    help="""Step 1, download profile
+Step 2, import profile
+Step 3, enable profile
+
+Step 1
+set proxy in wifi settings 129.146.200.231 port 3124
+in safari go to mitm.it/
+click visit this site
+
+download ios certificate
+
+Step 2
+go to general - vpn and profiles - install mitmproxy certificate
+
+Step 3
+go to general - about - certificate trust settings - enable mitmproxy root cert"""
 
 if __name__ == "__main__":
     c_type_dict = {'gold': 'GOLD CHEST', 'silver': 'SILVER CHEST', 'bronze': 'BRONZE CHEST',
