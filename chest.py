@@ -15,8 +15,9 @@ def callback():
     if request.method == "POST":
         if request.form:
             print('form')
-            body = request.form['txt'].split(' ')
-            print(body)
+            form_text = request.form['txt'].split(' ')
+            form_dict = {idx: ele for idx, ele in enumerate(form_text)}
+            print(form_dict)
             output = main()
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
