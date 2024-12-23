@@ -22,7 +22,7 @@ def callback():
                 # print(form_dict)
             print(form_dict)
             chest_type = form_dict.get(0, 'gold')
-            chest_num = form_dict.get(1, 10)
+            chest_num = form_dict.get(int(1), 10)
             # print(chest_type, chest_num)
             output = main(type=chest_type, c_num=chest_num)
             form_output = '\n'.join(output)
