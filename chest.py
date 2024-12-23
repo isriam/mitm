@@ -80,7 +80,7 @@ def xml_parser(data):
 
 def main(**kwargs):
     from chestpredictor2 import ChestPredictor
-    chest_type = kwargs.get('chest_type')
+    chest_type = kwargs.get('type', 'gold')
     print(chest_type)
     c_num = kwargs.get('c_num', 10)
     print(c_num)
