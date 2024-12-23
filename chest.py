@@ -13,7 +13,7 @@ app = Flask(__name__)
 def callback():
     if request.method == "POST":
         if request.form:
-            print('form')
+            # print('form')
             form_dict = {}
             if request.form['txt']:
                 print('form text')
