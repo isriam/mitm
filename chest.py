@@ -21,9 +21,9 @@ def callback():
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
                 print(form_dict)
             print(form_dict)
-            print(form_dict.get('0', 'gold'))
-            print(form_dict.get('1', 10))
-            output = main(type=form_dict.get('0', 'gold'), c_num=form_dict.get('1', 10))
+            chest_type = form_dict.get('0', 'gold')
+            chest_num = form_dict.get('1', 10)
+            output = main(type=chest_type, c_num=chest_num)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, default=refill_form, help=help_text)
@@ -79,7 +79,7 @@ def xml_parser(data):
 
 def main(**kwargs):
     from chestpredictor2 import ChestPredictor
-    c_num = kwargs.get('count', 10)
+    c_num = kwargs.get('c_num', 10)
     total = kwargs.get('total', False)
     spin_type_title = kwargs.get('type', c_type_dict.get('gold'))
     # params = /dragons/event/current?
