@@ -214,4 +214,4 @@ if __name__ == "__main__":
         world_params = json.load(file)
 
     serve(app, host='0.0.0.0', port=5000)
-    main(c_num, c_type, params, about_v2, world_params, total)
+
