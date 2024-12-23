@@ -176,7 +176,8 @@ def main(c_num, c_type, params, about_v2, world_params, total):
     return out
 
 def help():
-    help="""Step 1, download profile
+    help="""
+Step 1, download profile
 Step 2, import profile
 Step 3, enable profile
 
