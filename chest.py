@@ -23,8 +23,9 @@ def callback():
             print(form_dict)
             chest_type = form_dict.get(0, 'gold')
             chest_num = form_dict.get(int(1), 10)
+            total = form_dict.get(2, False)
             # print(chest_type, chest_num)
-            output = main(type=chest_type, c_num=chest_num)
+            output = main(type=chest_type, c_num=chest_num, total=total)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, default=refill_form, help=help_text)
