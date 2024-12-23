@@ -11,7 +11,6 @@ app = Flask(__name__)
 
 @app.route("/", methods=["POST", "GET"])
 def callback():
-    print('here!')
     if request.method == "POST":
         if request.form:
             print('form')
@@ -21,6 +20,7 @@ def callback():
                 form_text = request.form['txt'].split(' ')
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
                 print(form_dict)
+            print(form_dict)
             output = main(type=form_dict.get('0', 'gold'), c_num=form_dict.get('1', 10))
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
