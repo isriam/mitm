@@ -20,7 +20,7 @@ def callback():
             if form_text:
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
                 print(form_dict)
-            output = main(type=form_dict.get('0', 10), c_num=form_dict.get('1', 'gold'))
+            output = main(type=form_dict.get('0', 'gold'), c_num=form_dict.get('1', 10))
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, default=refill_form, help=help_text)
