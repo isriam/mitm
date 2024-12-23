@@ -214,5 +214,6 @@ if __name__ == "__main__":
     with open('/home/ubuntu/.mitmproxy/wardragons/world_params.txt', 'r') as file:
         world_params = json.load(file)
 
+    print('serving')
     serve(app, host='0.0.0.0', port=5443)
 
