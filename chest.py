@@ -15,10 +15,8 @@ def callback():
     if request.method == "POST":
         if request.form:
             print('form')
-            print(vars(request))
-            print(request.form)
-            #body = request.get_json()
-            # print(body)
+            body = request.form['txt'].split(' ')
+            print(body)
             output = main()
             refill_form = request.form['txt']
             return render_template("bot.html", content=output, default=refill_form, help=help)
@@ -75,7 +73,7 @@ def main(**kwargs):
     from chestpredictor2 import ChestPredictor
     c_num = kwargs.get('count', 10)
     total = kwargs.get('total', False)
-    spin_type_title = kwargs.get('type', 'gold')
+    spin_type_title = kwargs.get('type', c_type_dict.get('gold'))
     # params = /dragons/event/current?
     # about_v2 = /ext/dragonsong/event/about_v2?
     # world params = /ext/dragonsong/world/get_params?
