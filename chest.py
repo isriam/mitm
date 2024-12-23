@@ -12,8 +12,13 @@ app = Flask(__name__)
 @app.route("/", methods=["POST", "GET"])
 def callback():
     print('here!')
+    if request.method == "POST":
+        if request.form:
+            output = main()
+            refill_form = request.form['txt']
+            return render_template("bot.html", content=output, default=refill_form, help=help)
     if request.method == "GET":
-        output = main(c_num, c_type, params, about_v2, world_params, total)
+        output = main()
         form_output = '\n'.join(output)
         return render_template("bot.html", help=help_text, content=form_output)#, adminhelp=help2)
     return 'OK'
@@ -61,14 +66,16 @@ def xml_parser(data):
     # print(wddata)
     return wddata
 
-def main(c_num, c_type, params, about_v2, world_params, total):
+def main(**kwargs):
     from chestpredictor2 import ChestPredictor
-    spin_type_title = c_type_dict.get(c_type, 'gold')
+    c_num = kwargs.get('count', 10)
+    total = kwargs.get('total', False)
+    spin_type_title = kwargs.get('type', 'gold')
     # params = /dragons/event/current?
     # about_v2 = /ext/dragonsong/event/about_v2?
     # world params = /ext/dragonsong/world/get_params?
 
-    params = xml_parser(params)
+    params = xml_parser(unparsed_params)
 
     out = []
 
@@ -204,9 +211,9 @@ if __name__ == "__main__":
                    'draconic': 'DRACONIC CHEST', 'sigil': 'SUPER SIGIL CHEST', 'platinum': 'PLATINUM CHEST',
                    'relic': 'RELIC CHEST', 'atlas': 'ATLAS CHEST', 'glory': 'ATLAS BADGE CHEST', 'special': 'SPECIAL CHEST',
                    'all': 'all'}
-    c_num = 20
-    c_type = 'all'
-    total = False
+    #c_num = 20
+    #c_type = 'all'
+    #total = False
 
     about_v2_path = '/home/ubuntu/.mitmproxy/wardragons/about_v2.txt'
     about_v2_creation_time = time.ctime(os.path.getctime(about_v2_path))
@@ -221,7 +228,7 @@ if __name__ == "__main__":
         about_v2 = json.load(file)
 
     with open(params_path, 'r') as file:
-        params = file.read()
+        unparsed_params = file.read()
 
     with open(world_params_path, 'r') as file:
         world_params = json.load(file)
