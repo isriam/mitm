@@ -21,7 +21,7 @@ def callback():
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
                 # print(form_dict)
             print(form_dict)
-            chest_type = form_dict.get(c_type_dict.get(0), c_type_dict.get('gold'))
+            chest_type = form_dict.get(0, 'gold')
             chest_num = form_dict.get(1, 10)
             print(chest_type, chest_num)
             output = main(type=chest_type, c_num=chest_num)
@@ -83,7 +83,7 @@ def main(**kwargs):
     c_num = kwargs.get('c_num', 10)
     print(c_num)
     total = kwargs.get('total', False)
-    spin_type_title = kwargs.get('type', c_type_dict.get('gold'))
+    spin_type_title = kwargs.get('type', 'GOLD CHEST')
     print(spin_type_title)
     # params = /dragons/event/current?
     # about_v2 = /ext/dragonsong/event/about_v2?
