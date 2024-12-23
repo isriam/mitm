@@ -10,30 +10,10 @@ app = Flask(__name__)
 @app.route("/", methods=["POST", "GET"])
 def callback():
     print('here!')
-    if request.method == "POST":
-        output = []
-        refill_form = ''
-        if 'application/json' in request.content_type:
-            command = ''
-            body = request.get_json()
-        else:
-            command = request.form['txt']
-            body = {"events": [{"type": "web", "message": {"type": "text", "text": command},
-                                "source": {"type": "group", "groupId": 0, "userId": 0}}]}
-        if request.form:
-            # print('form exists')
-            print('Web Request!')
-            print(request.headers)
-            print(body)
-            output = main(c_num, c_type, params, about_v2, world_params, total)
-        else:
-            output = "not form"
-            refill_form = request.form['txt']
-            print('output', output)
-        return render_template("bot.html", content=output, default=refill_form)#, adminhelp=help2)
     if request.method == "GET":
         output = main(c_num, c_type, params, about_v2, world_params, total)
-        return render_template("bot.html", content=output)#, adminhelp=help2)
+        form_output = '\n'.join(output)
+        return render_template("bot.html", content=form_output)#, adminhelp=help2)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
