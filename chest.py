@@ -204,13 +204,13 @@ if __name__ == "__main__":
     total = False
 
 
-    with open('~/.mitmproxy/wardragons/about_v2.txt', 'r') as file:
+    with open('/home/ubuntu/.mitmproxy/wardragons/about_v2.txt', 'r') as file:
         about_v2 = json.load(file)
 
-    with open('~/.mitmproxy/wardragons/params.txt', 'r') as file:
+    with open('/home/ubuntu/.mitmproxy/wardragons/params.txt', 'r') as file:
         params = file.read()
 
-    with open('~/.mitmproxy/wardragons/world_params.txt', 'r') as file:
+    with open('/home/ubuntu/.mitmproxy/wardragons/world_params.txt', 'r') as file:
         world_params = json.load(file)
 
     serve(app, host='0.0.0.0', port=5000)
