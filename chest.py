@@ -192,6 +192,7 @@ go to general - vpn and profiles - install mitmproxy certificate
 
 Step 3
 go to general - about - certificate trust settings - enable mitmproxy root cert"""
+    return help
 
 if __name__ == "__main__":
     c_type_dict = {'gold': 'GOLD CHEST', 'silver': 'SILVER CHEST', 'bronze': 'BRONZE CHEST',
