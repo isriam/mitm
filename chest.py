@@ -2,7 +2,46 @@
 import json
 from html.parser import HTMLParser
 import re
+from waitress import serve
+from flask import Flask, request, abort, render_template
 
+app = Flask(__name__)
+
+@app.route("/", methods=["POST", "GET"])
+def callback():
+    if request.method == "POST":
+        output = []
+        refill_form = ''
+        if 'application/json' in request.content_type:
+            command = ''
+            body = request.get_json()
+        else:
+            command = request.form['txt']
+            body = {"events": [{"type": "web", "message": {"type": "text", "text": command},
+                                "source": {"type": "group", "groupId": 0, "userId": 0}}]}
+        if request.form:
+            # print('form exists')
+            print('Web Request!')
+            print(request.headers)
+            if command.startswith('/'):
+                if '/linux' in command:
+                    print('sneaky!')
+                    print(command, body)
+                    output = 'Sneaky!'
+                else:
+                    reply_token, group_id = 0, 0
+                    print(body)
+                    output = admincmds(body, reply_token, group_id)
+            else:
+                output = cmds(body)
+            refill_form = request.form['txt']
+            print('output', output)
+            return render_template("bot.html", content=output, default=refill_form, help=help, search=search)#, adminhelp=help2)
+        else:
+            print("not request.form")
+    if request.method == "GET":
+        return render_template("bot.html", help=help, search=search)#, adminhelp=help2)
+    return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
         def handle_starttag(self, tag, attrs):
@@ -163,6 +202,7 @@ def main(c_num, c_type, params, about_v2, world_params, total):
     print('\n'.join(out))
     return out
 
+
 if __name__ == "__main__":
     c_type_dict = {'gold': 'GOLD CHEST', 'silver': 'SILVER CHEST', 'bronze': 'BRONZE CHEST',
                    'draconic': 'DRACONIC CHEST', 'sigil': 'SUPER SIGIL CHEST', 'platinum': 'PLATINUM CHEST',
@@ -173,13 +213,14 @@ if __name__ == "__main__":
     total = False
 
 
-    with open('about_v2.txt', 'r') as file:
+    with open('~/.mitmproxy/wardragons/about_v2.txt', 'r') as file:
         about_v2 = json.load(file)
 
-    with open('params.txt', 'r') as file:
+    with open('~/.mitmproxy/wardragons/params.txt', 'r') as file:
         params = file.read()
 
-    with open('world_params.txt', 'r') as file:
+    with open('~/.mitmproxy/wardragons/world_params.txt', 'r') as file:
         world_params = json.load(file)
 
+    serve(app, host='0.0.0.0', port=5000)
     main(c_num, c_type, params, about_v2, world_params, total)
