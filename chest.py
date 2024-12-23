@@ -85,7 +85,7 @@ def main(**kwargs):
     c_num = kwargs.get('c_num', 10)
     print(c_num)
     total = kwargs.get('total', False)
-    spin_type_title = kwargs.get(c_type_dict.get(chest_type), 'GOLD CHEST')
+    spin_type_title = c_type_dict.get(chest_type, 'GOLD CHEST')
     print(spin_type_title)
     # params = /dragons/event/current?
     # about_v2 = /ext/dragonsong/event/about_v2?
