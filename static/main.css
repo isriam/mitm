@@ -1,5 +1,6 @@
+white-space: pre-line
 .output {
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
 .help {
     white-space: pre-wrap;
