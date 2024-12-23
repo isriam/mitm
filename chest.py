@@ -4,6 +4,8 @@ from html.parser import HTMLParser
 import re
 from waitress import serve
 from flask import Flask, request, abort, render_template
+import time
+import os
 
 app = Flask(__name__)
 
@@ -205,15 +207,19 @@ if __name__ == "__main__":
 
     with open('/home/ubuntu/.mitmproxy/wardragons/about_v2.txt', 'r') as file:
         about_v2 = json.load(file)
+        about_v2_creation_time = time.ctime(os.path.getctime(file))
 
     with open('/home/ubuntu/.mitmproxy/wardragons/params.txt', 'r') as file:
         params = file.read()
+        params_creation_time = time.ctime(os.path.getctime(file))
 
     with open('/home/ubuntu/.mitmproxy/wardragons/world_params.txt', 'r') as file:
         world_params = json.load(file)
+        world_params_creation_time = time.ctime(os.path.getctime(file))
 
     help_text = help()
 
     print('serving')
+    print(about_v2_creation_time, params_creation_time, world_params_creation_time)
     serve(app, host='0.0.0.0', port=5443)
 
