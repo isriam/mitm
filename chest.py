@@ -16,6 +16,7 @@ def callback():
         if request.form:
             print('form')
             print(vars(request))
+            print(request.form)
             #body = request.get_json()
             # print(body)
             output = main()
