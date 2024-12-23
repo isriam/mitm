@@ -21,6 +21,8 @@ def callback():
                 form_dict = {idx: ele for idx, ele in enumerate(form_text)}
                 print(form_dict)
             print(form_dict)
+            print(form_dict.get('0', 'gold'))
+            print(form_dict.get('1', 10))
             output = main(type=form_dict.get('0', 'gold'), c_num=form_dict.get('1', 10))
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
