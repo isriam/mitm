@@ -98,8 +98,8 @@ def main(**kwargs):
     with open(params_path, 'r') as file:
         unparsed_params = file.read()
 
-    with open(world_params_path, 'r') as file:
-        world_params = json.load(file)
+    # with open(world_params_path, 'r') as file:
+        # world_params = json.load(file)
 
     params = xml_parser(unparsed_params)
 
@@ -119,7 +119,7 @@ def main(**kwargs):
                 break
             else:
                 # print(spin_type_title)
-                cp = ChestPredictor(params=params, about=about_v2, world_params=world_params)
+                cp = ChestPredictor(params=params, about=about_v2)  # , world_params=world_params)
 
                 drops = cp.getDrops(spin_type_title=spin_type_title, drop_count=c_num)
                 for event in drops:
@@ -154,7 +154,7 @@ def main(**kwargs):
                     event_drop_dict.update({event_name: drop_list})
                     out.append('\r')
     else:
-        cp = ChestPredictor(params=params, about=about_v2, world_params=world_params)
+        cp = ChestPredictor(params=params, about=about_v2)  # , world_params=world_params)
 
         drops = cp.getDrops(spin_type_title=spin_type_title, drop_count=c_num)
         for event in drops:
@@ -232,26 +232,25 @@ go to general - about - certificate trust settings - enable mitmproxy root cert"
 def creation_time():
     about_v2_creation_time = time.ctime(os.path.getmtime(about_v2_path))
     params_creation_time = time.ctime(os.path.getmtime(params_path))
-    world_params_creation_time = time.ctime(os.path.getmtime(world_params_path))
+    # world_params_creation_time = time.ctime(os.path.getmtime(world_params_path))
     times = f"""
 about_v2_modified = {about_v2_creation_time}
-params_modified = {params_creation_time}
-atlas_modified = {world_params_creation_time}"""
+params_modified = {params_creation_time}"""
     return times
 
 
 if __name__ == "__main__":
     c_type_dict = {'gold': 'GOLD CHEST', 'silver': 'SILVER CHEST', 'bronze': 'BRONZE CHEST',
                    'draconic': 'DRACONIC CHEST', 'sigil': 'SUPER SIGIL CHEST', 'platinum': 'PLATINUM CHEST',
-                   'relic': 'RELIC CHEST', 'atlas': 'ATLAS CHEST', 'glory': 'ATLAS BADGE CHEST', 'special': 'SPECIAL CHEST',
-                   'all': 'all'}
-    #c_num = 20
-    #c_type = 'all'
-    #total = False
+                   'relic': 'RELIC CHEST', 'special': 'SPECIAL CHEST',
+                   'all': 'all'}  # 'atlas': 'ATLAS CHEST', 'glory': 'ATLAS BADGE CHEST'
+    # c_num = 20
+    # c_type = 'all'
+    # total = False
 
     about_v2_path = '/home/ubuntu/.mitmproxy/wardragons/about_v2.txt'
     params_path = '/home/ubuntu/.mitmproxy/wardragons/params.txt'
-    world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
+    # world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
 
     help_text = help()
 
