@@ -87,7 +87,7 @@ except Exception as e:
         c = csv.DictReader(f, delimiter=",")
         runes = [Rune(**x) for x in c if x['identifier'] != "String"]
 
-season = "valorcrest"
+season = "renegades"
 real_names_dict = {'breedingToken': 'Egg Tokens', 'innerFire01': 'Inner Fire', season + 'Sigil': 'Sigil',
                    'expediteConsumable0': '3 Min Speedup', 'xpMultiplierSpellConsumable01': '+100% XP Boost',
                    'elementalEmber': 'Elemental Ember', 'electrumBar': 'Electrum Bars', 'fireShard': 'Fire Shards',
