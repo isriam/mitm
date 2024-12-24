@@ -28,7 +28,8 @@ def callback():
             output = main(type=chest_type, c_num=chest_num, total=total)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
-            return render_template("bot.html", content=form_output, default=refill_form, help=help_text)
+            timers = creation_time()
+            return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
     else:
         # output = main()
         # form_output = '\n'.join(output)
@@ -216,12 +217,20 @@ Step 2
 go to general - vpn and profiles - install mitmproxy certificate
 
 Step 3
-go to general - about - certificate trust settings - enable mitmproxy root cert
-
-about_v2_creation = {about_v2_creation_time}
-params_creation = {params_creation_time}
-atlas_creation = {world_params_creation_time}"""
+go to general - about - certificate trust settings - enable mitmproxy root cert"""
     return help
+
+
+def creation_time():
+    about_v2_creation_time = time.ctime(os.path.getmtime(about_v2_path))
+    params_creation_time = time.ctime(os.path.getmtime(params_path))
+    world_params_creation_time = time.ctime(os.path.getmtime(world_params_path))
+    times = f"""
+about_v2_modified = {about_v2_creation_time}
+params_modified = {params_creation_time}
+atlas_modified = {world_params_creation_time}"""
+    return times
+
 
 if __name__ == "__main__":
     c_type_dict = {'gold': 'GOLD CHEST', 'silver': 'SILVER CHEST', 'bronze': 'BRONZE CHEST',
@@ -233,13 +242,8 @@ if __name__ == "__main__":
     #total = False
 
     about_v2_path = '/home/ubuntu/.mitmproxy/wardragons/about_v2.txt'
-    about_v2_creation_time = time.ctime(os.path.getmtime(about_v2_path))
-
     params_path = '/home/ubuntu/.mitmproxy/wardragons/params.txt'
-    params_creation_time = time.ctime(os.path.getmtime(params_path))
-
     world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
-    world_params_creation_time = time.ctime(os.path.getmtime(world_params_path))
 
     with open(about_v2_path, 'r') as file:
         about_v2 = json.load(file)
@@ -253,6 +257,6 @@ if __name__ == "__main__":
     help_text = help()
 
     print('serving')
-    print(about_v2_creation_time, params_creation_time, world_params_creation_time)
+    # print(about_v2_creation_time, params_creation_time, world_params_creation_time)
     serve(app, host='0.0.0.0', port=5443)
 

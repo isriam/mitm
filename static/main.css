@@ -1,13 +1,11 @@
 .help {
     white-space: pre-wrap;
 }
-.output {
+.timers {
     white-space: pre-wrap;
 }
-.adminhelp {
+.output {
     white-space: pre-wrap;
-    float: left;
-    margin: 30px
 }
 .search {
     white-space: pre-wrap;
