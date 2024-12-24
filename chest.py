@@ -233,13 +233,13 @@ if __name__ == "__main__":
     #total = False
 
     about_v2_path = '/home/ubuntu/.mitmproxy/wardragons/about_v2.txt'
-    about_v2_creation_time = time.ctime(os.path.getctime(about_v2_path))
+    about_v2_creation_time = time.ctime(os.path.getmtime(about_v2_path))
 
     params_path = '/home/ubuntu/.mitmproxy/wardragons/params.txt'
-    params_creation_time = time.ctime(os.path.getctime(params_path))
+    params_creation_time = time.ctime(os.path.getmtime(params_path))
 
     world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
-    world_params_creation_time = time.ctime(os.path.getctime(world_params_path))
+    world_params_creation_time = time.ctime(os.path.getmtime(world_params_path))
 
     with open(about_v2_path, 'r') as file:
         about_v2 = json.load(file)
