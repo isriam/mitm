@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["POST", "GET"])
 def callback():
+    timers = creation_time()
     if request.method == "POST":
         if request.form:
             # print('form')
@@ -28,12 +29,11 @@ def callback():
             output = main(type=chest_type, c_num=chest_num, total=total)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
-            timers = creation_time()
             return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
     else:
         # output = main()
         # form_output = '\n'.join(output)
-        return render_template("bot.html", help=help_text)
+        return render_template("bot.html", timers=timers, help=help_text)
     return 'OK'
 def xml_parser(data):
     class MyHTMLParser(HTMLParser):
