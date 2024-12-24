@@ -92,6 +92,14 @@ def main(**kwargs):
     # params = /dragons/event/current?
     # about_v2 = /ext/dragonsong/event/about_v2?
     # world params = /ext/dragonsong/world/get_params?
+    with open(about_v2_path, 'r') as file:
+        about_v2 = json.load(file)
+
+    with open(params_path, 'r') as file:
+        unparsed_params = file.read()
+
+    with open(world_params_path, 'r') as file:
+        world_params = json.load(file)
 
     params = xml_parser(unparsed_params)
 
@@ -244,15 +252,6 @@ if __name__ == "__main__":
     about_v2_path = '/home/ubuntu/.mitmproxy/wardragons/about_v2.txt'
     params_path = '/home/ubuntu/.mitmproxy/wardragons/params.txt'
     world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
-
-    with open(about_v2_path, 'r') as file:
-        about_v2 = json.load(file)
-
-    with open(params_path, 'r') as file:
-        unparsed_params = file.read()
-
-    with open(world_params_path, 'r') as file:
-        world_params = json.load(file)
 
     help_text = help()
 
