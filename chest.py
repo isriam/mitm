@@ -35,7 +35,7 @@ def callback():
         # form_output = '\n'.join(output)
         return render_template("bot.html", timers=timers, help=help_text)
     return 'OK'
-def xml_parser(data):
+def xml_parser(data=None):
     class MyHTMLParser(HTMLParser):
         def handle_starttag(self, tag, attrs):
             self.wdtag = tag
@@ -242,6 +242,8 @@ def creation_time():
 
     params = xml_parser(unparsed_params)
 
+    name = params.get('params_and_data').get('myProfile').get('name')
+
     pgid = None
     for x in about_v2:
         for y in about_v2[x]["eventInfo"].get("earned_awards"):
@@ -251,8 +253,8 @@ def creation_time():
                 # print(pgid)
 
     times = f"""
-about_v2_modified = {about_v2_creation_time} - {pgid}
-params_modified = {params_creation_time} - {pgid}"""
+about_v2_modified = {about_v2_creation_time} - {name}
+params_modified = {params_creation_time} - {name}"""
     return times
 
 
