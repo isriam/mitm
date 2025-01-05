@@ -241,6 +241,7 @@ def creation_time():
         unparsed_params = file.read()
 
     params = xml_parser(unparsed_params)
+    print(params)
 
     pgid = None
     for x in about_v2:
