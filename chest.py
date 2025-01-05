@@ -33,7 +33,7 @@ def callback():
     else:
         # output = main()
         # form_output = '\n'.join(output)
-        timers = creation_time()
+        timers = creation_time(pgid='')
         return render_template("bot.html", timers=timers, help=help_text)
     return 'OK'
 def xml_parser(data):
