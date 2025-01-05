@@ -29,12 +29,10 @@ def callback():
             output = main(type=chest_type, c_num=chest_num, total=total)
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
-            timers = creation_time()
             return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
     else:
         # output = main()
         # form_output = '\n'.join(output)
-        timers = creation_time()
         return render_template("bot.html", timers=timers, help=help_text)
     return 'OK'
 def xml_parser(data):
@@ -232,12 +230,18 @@ go to general - about - certificate trust settings - enable mitmproxy root cert"
     return help
 
 
-def creation_time(pgid=None):
+def creation_time():
     about_v2_creation_time = time.ctime(os.path.getmtime(about_v2_path))
     params_creation_time = time.ctime(os.path.getmtime(params_path))
-    # world_params_creation_time = time.ctime(os.path.getmtime(world_params_path))
+    # world_params_creation_time = time.ctime(os.path.getmtime(world_params_path)
+
     with open(about_v2_path, 'r') as file:
         about_v2 = json.load(file)
+    with open(params_path, 'r') as file:
+        unparsed_params = file.read()
+
+    params = xml_parser(unparsed_params)
+
     pgid = None
     for x in about_v2:
         for y in about_v2[x]["eventInfo"].get("earned_awards"):
@@ -245,6 +249,7 @@ def creation_time(pgid=None):
                 awards = y.split('-')
                 pgid = awards[2]
                 # print(pgid)
+
     times = f"""
 about_v2_modified = {about_v2_creation_time} - {pgid}
 params_modified = {params_creation_time} - {pgid}"""
