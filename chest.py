@@ -244,17 +244,10 @@ def creation_time():
 
     name = params.get('params_and_data').get('myProfile').get('name')
 
-    pgid = None
-    for x in about_v2:
-        for y in about_v2[x]["eventInfo"].get("earned_awards"):
-            if 'QuestAwards-teamquest' in y:
-                awards = y.split('-')
-                pgid = awards[2]
-                # print(pgid)
-
     times = f"""
 about_v2_modified = {about_v2_creation_time} - {name}
 params_modified = {params_creation_time} - {name}"""
+
     return times
 
 
