@@ -7,7 +7,7 @@ class SavePackets:
     def __init__(self):
         self.counter = 0
 
-    def response(self, flow: http.HTTPFlow):
+    def response(self, flow):
         if flow.response and flow.response.content:
             #print(vars(flow.request))
             #print(flow.request.path)
@@ -49,4 +49,4 @@ class SavePackets:
             ctx.master.shutdown()
 
 
-addons = [SavePackets]
+addons = [SavePackets()]
