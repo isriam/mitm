@@ -8,7 +8,7 @@ services:
     volumes:
       - /home/ubuntu/.mitmproxy:/root/.mitmproxy
       - /home/ubuntu/mitm/:/root/mitm
-    entrypoint: '/bin/sh -c "mitmweb --web-host 0.0.0.0 --listen-port 3124 --set block_global=false --ssl-insecure -s /home/ubuntu/mitm/proxyscript.py"'
+    entrypoint: '/bin/sh -c "mitmweb --web-host 0.0.0.0 --listen-port 3124 --set block_global=false --ssl-insecure -s /root/mitm/proxyscript.py"'
         #command:
         #- mitmweb
         #- --web-host
