@@ -7,7 +7,7 @@ class SavePackets:
     def __init__(self):
         self.counter = 0
 
-    def response(self, flow: http.HTTPFlow) -> None:
+    def response(self, flow: http.HTTPFlow):
         if flow.response and flow.response.content:
             #print(vars(flow.request))
             #print(flow.request.path)
