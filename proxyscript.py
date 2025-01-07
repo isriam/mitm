@@ -22,6 +22,7 @@ class SavePackets:
                 os.chmod("/root/.mitmproxy/wardragons/about_v2.txt", 0o744)
                 about_completed = True
                 self.counter += 1
+                self.check_and_exit()
             if '/dragons/event/current' in flow.request.path:
                 print('params', flow.request.path)
                 params = flow.response.content.decode("utf-8")
@@ -32,6 +33,7 @@ class SavePackets:
                 os.chmod("/root/.mitmproxy/wardragons/params.txt", 0o744)
                 params_completed = True
                 self.counter += 1
+                self.check_and_exit()
             #if '/ext/dragonsong/world/get_params' in flow.request.path:
             #    print('world_params', flow.request.path)
             #    world_params_raw = flow.response.content.decode("utf-8")
@@ -46,6 +48,7 @@ class SavePackets:
     def check_and_exit(self):
         if self.counter >= 2:
             ctx.log.info("Target packet count reached. Shutting down mitmproxy.")
+            print('check and exit', self.counter)
             ctx.master.shutdown()
 
 
