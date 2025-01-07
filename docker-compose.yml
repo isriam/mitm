@@ -1,0 +1,17 @@
+services:
+  mitm:
+    image: mitmproxy/mitmproxy
+    container_name: mitm
+    ports:
+      - "3124:3124"
+      - "8081:8081"
+    volumes:
+      - /home/ubuntu/.mitmproxy:/root/.mitmproxy
+    entrypoint: '/bin/sh -c "mitmweb --web-host 0.0.0.0 --listen-port 3124 --set block_global=false --ssl-insecure -s /home/ubuntu/mitm/proxyscript.py"'
+        #command:
+        #- mitmweb
+        #- --web-host
+        #- 0.0.0.0
+    restart: always
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
