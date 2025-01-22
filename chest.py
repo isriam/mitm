@@ -235,8 +235,6 @@ def creation_time():
     params_creation_time = time.ctime(os.path.getmtime(params_path))
     # world_params_creation_time = time.ctime(os.path.getmtime(world_params_path)
 
-    with open(about_v2_path, 'r') as file:
-        about_v2 = json.load(file)
     with open(params_path, 'r') as file:
         unparsed_params = file.read()
 
@@ -254,15 +252,14 @@ params_modified = {params_creation_time} - {name}"""
 if __name__ == "__main__":
     c_type_dict = {'gold': 'GOLD CHEST', 'silver': 'SILVER CHEST', 'bronze': 'BRONZE CHEST',
                    'draconic': 'DRACONIC CHEST', 'sigil': 'SUPER SIGIL CHEST', 'platinum': 'PLATINUM CHEST',
-                   'relic': 'RELIC CHEST', 'special': 'SPECIAL CHEST',
-                   'all': 'all'}  # 'atlas': 'ATLAS CHEST', 'glory': 'ATLAS BADGE CHEST'
+                   'relic': 'RELIC CHEST', 'all': 'all'}  # 'atlas': 'ATLAS CHEST', 'glory': 'ATLAS BADGE CHEST'
     # c_num = 20
     # c_type = 'all'
     # total = False
 
     about_v2_path = '/home/ubuntu/.mitmproxy/wardragons/about_v2.txt'
     params_path = '/home/ubuntu/.mitmproxy/wardragons/params.txt'
-    # world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
+    world_params_path = '/home/ubuntu/.mitmproxy/wardragons/world_params.txt'
 
     help_text = help()
 
