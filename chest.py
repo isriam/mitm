@@ -32,7 +32,7 @@ def callback():
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
-        else:
+        if request.form['restart_proxy']:
             print('restarting docker')
             container_name = 'mitm'
             try:
@@ -44,7 +44,7 @@ def callback():
                 print(f"Container '{container_name}' not found.")
             except docker.errors.APIError as e:
                 print(f"Error restarting container '{container_name}': {e}")
-            #return render_template("bot.html", timers=timers, help=help_text)
+            return render_template("bot.html", timers=timers, help=help_text)
 
     else:
         # output = main()
