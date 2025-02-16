@@ -15,7 +15,20 @@ def callback():
     timers = creation_time()
     if request.method == "POST":
         print([x for x in request.form])
-        if request.form['chests']:
+        if 'restart_proxy' in request.form:
+            print('restarting docker')
+            container_name = 'mitm'
+            try:
+                client = docker.from_env()
+                container = client.containers.get(container_name)
+                container.restart()
+                print(f"Container '{container_name}' restarted successfully.")
+            except docker.errors.NotFound:
+                print(f"Container '{container_name}' not found.")
+            except docker.errors.APIError as e:
+                print(f"Error restarting container '{container_name}': {e}")
+            return render_template("bot.html", timers=timers, help=help_text)
+        if 'chests' in request.form:
             # print('form')
             form_dict = {}
             if request.form['txt']:
@@ -32,19 +45,6 @@ def callback():
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
-        if request.form['restart_proxy']:
-            print('restarting docker')
-            container_name = 'mitm'
-            try:
-                client = docker.from_env()
-                container = client.containers.get(container_name)
-                container.restart()
-                print(f"Container '{container_name}' restarted successfully.")
-            except docker.errors.NotFound:
-                print(f"Container '{container_name}' not found.")
-            except docker.errors.APIError as e:
-                print(f"Error restarting container '{container_name}': {e}")
-            return render_template("bot.html", timers=timers, help=help_text)
 
     else:
         # output = main()
