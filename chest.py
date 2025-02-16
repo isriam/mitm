@@ -16,6 +16,7 @@ def callback():
     #print(vars(request))
     print(request.form)
     print(vars(request.form))
+    print(request.form['name'])
     if request.method == "POST":
         if request.form:
             # print('form')
