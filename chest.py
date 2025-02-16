@@ -23,11 +23,14 @@ def callback():
                 container = client.containers.get(container_name)
                 container.restart()
                 print(f"Container '{container_name}' restarted successfully.")
+                out = f"Container '{container_name}' restarted successfully."
             except docker.errors.NotFound:
                 print(f"Container '{container_name}' not found.")
+                out = f"Container '{container_name}' not found."
             except docker.errors.APIError as e:
                 print(f"Error restarting container '{container_name}': {e}")
-            return render_template("bot.html", timers=timers, help=help_text)
+                out = f"Error restarting container '{container_name}': {e}"
+            return render_template("bot.html", timers=timers, help=help_text, out=out)
         if 'chests' in request.form:
             # print('form')
             form_dict = {}
