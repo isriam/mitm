@@ -13,7 +13,7 @@ app = Flask(__name__)
 def callback():
     timers = creation_time()
     if request.method == "POST":
-        print(request.form)
+        print([x for x in request.form])
         print(vars(request.form))
         print(request.form.__dir__)
         if request.form:
