@@ -23,7 +23,7 @@ def callback():
                 container = client.containers.get(container_name)
                 container.restart()
                 print(f"Container '{container_name}' restarted successfully.")
-                out = f"Container '{container_name}' restarted successfully."
+                out = f"Proxy restarted successfully."
             except docker.errors.NotFound:
                 print(f"Container '{container_name}' not found.")
                 out = f"Container '{container_name}' not found."
