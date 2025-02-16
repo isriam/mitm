@@ -32,10 +32,10 @@ def callback():
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
-        else:
+        if request.form['restart_proxy']:
             print('restarting docker')
+            container_name = 'mitm'
             try:
-                container_name = 'mitm'
                 client = docker.from_env()
                 container = client.containers.get(container_name)
                 container.restart()
