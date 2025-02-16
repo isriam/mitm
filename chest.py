@@ -13,11 +13,7 @@ app = Flask(__name__)
 def callback():
     timers = creation_time()
     if request.method == "POST":
-        print([x for x in request.form])
-        print(vars(request.form))
-        print(request.form.__dir__)
-        print(request.form.get('name'))
-        print(request.data)
+        print(request.form['name'])
         if request.form:
             # print('form')
             form_dict = {}
