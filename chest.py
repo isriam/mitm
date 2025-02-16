@@ -12,8 +12,8 @@ app = Flask(__name__)
 @app.route("/", methods=["POST", "GET"])
 def callback():
     timers = creation_time()
-    print(request)
-    print(vars(request))
+    #print(request)
+    #print(vars(request))
     print(request.form)
     print(vars(request.form))
     if request.method == "POST":
