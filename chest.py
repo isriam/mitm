@@ -14,7 +14,8 @@ def callback():
     timers = creation_time()
     if request.method == "POST":
         print([x for x in request.form])
-        print(vars(request.form))
+        if request.form['restart_proxy']:
+            print('yes')
         if request.form:
             # print('form')
             form_dict = {}
