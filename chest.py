@@ -6,6 +6,7 @@ from waitress import serve
 from flask import Flask, request, abort, render_template
 import time
 import os
+import docker
 
 app = Flask(__name__)
 
@@ -14,9 +15,7 @@ def callback():
     timers = creation_time()
     if request.method == "POST":
         print([x for x in request.form])
-        if request.form['restart_proxy']:
-            print('yes')
-        if request.form:
+        if request.form['chests']:
             # print('form')
             form_dict = {}
             if request.form['txt']:
@@ -33,6 +32,20 @@ def callback():
             form_output = '\n'.join(output)
             refill_form = request.form['txt']
             return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
+        else:
+            print('restarting docker')
+            try:
+                container_name = 'mitm'
+                client = docker.from_env()
+                container = client.containers.get(container_name)
+                container.restart()
+                print(f"Container '{container_name}' restarted successfully.")
+            except docker.errors.NotFound:
+                print(f"Container '{container_name}' not found.")
+            except docker.errors.APIError as e:
+                print(f"Error restarting container '{container_name}': {e}")
+            return render_template("bot.html", content=form_output, timers=timers, default=refill_form, help=help_text)
+
     else:
         # output = main()
         # form_output = '\n'.join(output)
