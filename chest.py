@@ -12,10 +12,11 @@ app = Flask(__name__)
 @app.route("/", methods=["POST", "GET"])
 def callback():
     timers = creation_time()
+    print(request)
+    print(vars(request))
+    print(request.form)
+    print(vars(request.form))
     if request.method == "POST":
-        print(request)
-        print(vars(request))
-        print(dir(request))
         if request.form:
             # print('form')
             form_dict = {}
@@ -37,9 +38,6 @@ def callback():
         # output = main()
         # form_output = '\n'.join(output)
         return render_template("bot.html", timers=timers, help=help_text)
-    print(request)
-    print(vars(request))
-    print(dir(request))
     return 'OK'
 def xml_parser(data=None):
     class MyHTMLParser(HTMLParser):
