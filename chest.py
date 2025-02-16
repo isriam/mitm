@@ -16,6 +16,7 @@ def callback():
         print([x for x in request.form])
         print(vars(request.form))
         print(request.form.__dir__)
+        print(request.form.get('name'))
         if request.form:
             # print('form')
             form_dict = {}
