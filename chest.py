@@ -15,7 +15,7 @@ def callback():
     if request.method == "POST":
         print(request.form)
         print(vars(request.form))
-        print(request.__dir__)
+        print(request.form.__dir__)
         if request.form:
             # print('form')
             form_dict = {}
