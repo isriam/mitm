@@ -11,10 +11,12 @@
 <div class = "timers">
 {{timers}}
 </div>
-<button type="button" onclick="alert('Hello World!')">Restart Proxy</button>
+<form action="" method="post" name="restart">
+    <p><input id="mySubmit2" type="submit" value="Submit"/></p>
+</form>
 <hr width="100%" size="2">
 <div class = "form">
-<form action="" method="post">
+<form action="" method="post" name="chests">
 	<h2>Chests:</h2>
     Example: platinum 10
 	<p><input id="myTxt" type="text" name="txt" value="{{default}}"/></p>
