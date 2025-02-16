@@ -37,6 +37,9 @@ def callback():
         # output = main()
         # form_output = '\n'.join(output)
         return render_template("bot.html", timers=timers, help=help_text)
+    print(request)
+    print(vars(request))
+    print(dir(request))
     return 'OK'
 def xml_parser(data=None):
     class MyHTMLParser(HTMLParser):
