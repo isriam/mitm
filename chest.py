@@ -245,7 +245,9 @@ Step 2
 go to general - vpn and profiles - install mitmproxy certificate
 
 Step 3
-go to general - about - certificate trust settings - enable mitmproxy root cert"""
+go to general - about - certificate trust settings - enable mitmproxy root cert
+
+After proxy is enabled, log into game and go to event, make sure both files on page below have current date/time and player"""
     return help
 
 
